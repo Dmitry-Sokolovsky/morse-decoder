@@ -37,10 +37,26 @@ const MORSE_TABLE = {
     '-----':  '0',
 };
 
-function decode(expr) {
-    // write your solution here
-}
+const MORSE = {
+    '00': '',
+    '10': '.',
+    '11': '-',
+    'space': '**********' 
+  };
+  
+  function decode(expr) {
 
-module.exports = {
-    decode
-}
+    let message = '';
+    let res = expr.match(/.{10}/g);
+    res.map(letter => {
+        letter.startsWith('*') ? message += ' '
+       : message += MORSE_TABLE[letter.replace(/00/g, '').replace(/10/g, '.').replace(/11/g, '-')]
+    });
+
+
+    return message;
+  }
+  
+  module.exports = {
+      decode
+  }
